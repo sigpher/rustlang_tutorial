@@ -1,35 +1,30 @@
+use ch10::{longest, notify, NewsArticle, Summary, Tweet};
+
 fn main() {
-    let v = vec![1, 2, 10, 5];
-    let largest_number = largest(&v);
-    println!("{largest_number}");
-    let v2 = vec!['a', 'z', 'c'];
-    println!("{}", largest(&v2));
+    let tweet = Tweet {
+        username: String::from("horse_ebook"),
+        content: String::from("of course, as you probably alreay know, people"),
+        reply: false,
+        retweet: false,
+    };
+    println!("1 new tweet: {}", tweet.summarize());
 
-    let point = Point { x: 10.0, y: 5.0 };
+    let article = NewsArticle {
+        headline: String::from("Penguins with the Stanley Cup Championship!"),
+        location: String::from("Pittsburgh, PA, USA"),
+        author: String::from("Iceburh"),
+        content: String::from(
+            "The Pittsburgh Penguins once again are the best \
+            hockey team in the NHL",
+        ),
+    };
+    println!("New article available! {}", article.summarize());
 
-    println!("{}", point.x());
-}
-fn largest<T>(list: &[T]) -> T
-where
-    T: PartialOrd + Copy,
-{
-    let mut largest = list[0];
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-    largest
-}
+    notify(&article);
 
-#[derive(Debug)]
-struct Point<T> {
-    x: T,
-    y: T,
-}
+    let x = "choi";
+    let y = "sigpher";
 
-impl<T> Point<T> {
-    fn x(&self) -> &T {
-        &self.x
-    }
+    let longest = longest(x, y);
+    println!("{longest}");
 }
